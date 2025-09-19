@@ -3,8 +3,8 @@
 Visando apreender e transformar todo conhecimento passado pela FullCyle. 
 Nesse projeto irei usar os seguintes tópicos abordados na modulo de nivelamento :
 
-- [ ] API Key OpenAi e GenAi 
-- [ ] Chamando a LLM pela primeira vez 
+- [x] API Key OpenAi e GenAi 
+- [x] Chamando a LLM pela primeira vez 
 - [ ] Prompt Templates 
 - [ ] Iniciando com Chains  
 - [ ] Criando Pipeline com mais etapas 
@@ -14,11 +14,11 @@ Nesse projeto irei usar os seguintes tópicos abordados na modulo de nivelamento
 - [ ] Agentes e ReAct
 - [ ] Criando Tools / Desenvolvendo Agentes
 - [ ] Introduçao a Data Loading e RAG 
-- [ ] Carregamento de PDF 
-- [ ] Iniciando com PgVector
-- [ ] Enriquecendo documentos
-- [ ] Criando Store para PGVector
-- [ ] Fazendo a ingestão dos documentos
+- [x] Carregamento de PDF 
+- [x] Iniciando com PgVector
+- [x] Enriquecendo documentos
+- [x] Criando Store para PGVector
+- [x] Fazendo a ingestão dos documentos
 - [ ] Fazendo busca vetorial
 
 > Todo o projeto foi feito para OpenAi conforme nivelamento.
