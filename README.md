@@ -5,21 +5,21 @@ Nesse projeto irei usar os seguintes tópicos abordados na modulo de nivelamento
 
 - [x] API Key OpenAi e GenAi 
 - [x] Chamando a LLM pela primeira vez 
-- [ ] Prompt Templates 
-- [ ] Iniciando com Chains  
-- [ ] Criando Pipeline com mais etapas 
-- [ ] Iniciando com sumarização
-- [ ] TextSpliter e Sumarização
-- [ ] Criando pipeline customizado de sumarização
+- [x] Prompt Templates 
+- [x] Iniciando com Chains  
+- [x] Criando Pipeline com mais etapas 
+- [x] Iniciando com sumarização
+- [x] TextSpliter e Sumarização
+- [x] Criando pipeline customizado de sumarização
 - [ ] Agentes e ReAct
-- [ ] Criando Tools / Desenvolvendo Agentes
-- [ ] Introduçao a Data Loading e RAG 
+- [x] Criando Tools / Desenvolvendo Agentes
+- [x] Introduçao a Data Loading e RAG 
 - [x] Carregamento de PDF 
 - [x] Iniciando com PgVector
 - [x] Enriquecendo documentos
 - [x] Criando Store para PGVector
 - [x] Fazendo a ingestão dos documentos
-- [ ] Fazendo busca vetorial
+- [x] Fazendo busca vetorial
 
 > Todo o projeto foi feito para OpenAi conforme nivelamento.
 
