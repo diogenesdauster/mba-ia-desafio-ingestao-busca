@@ -83,7 +83,16 @@ class PDFIngestor:
             logger.info("Dividindo documentos em chunks...")
             chunks = self.text_splitter.split_documents(documents)
             logger.info(f"Criados {len(chunks)} chunks")
-            return chunks
+            enriched = [
+                Document(
+                page_content=d.page_content,
+                metadata={k: v for k, v in d.metadata.items() if v not in ("",None)}
+                )
+                for d in chunks
+            ]
+            logger.info(f"Enriquecendo os chunks com metadados")
+
+            return enriched
             
         except Exception as e:
             logger.error(f"Falha ao dividir documentos: {str(e)}")
