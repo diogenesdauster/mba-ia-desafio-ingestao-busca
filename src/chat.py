@@ -281,3 +281,76 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+
+""""
+Exemplo : 
+
+Iniciando PDF Chatbot...
+Inicializando PDF Chatbot para coleção: fullcycle_langchain
+2025-09-21 18:31:05,259 - INFO - Configuração da chain de sumarização concluída
+2025-09-21 18:31:05,259 - INFO - DocumentSearchTool inicializada para coleção: fullcycle_langchain
+2025-09-21 18:31:05,261 - INFO - Ferramenta de busca criada com sucesso
+2025-09-21 18:31:05,261 - INFO - Criadas 1 ferramentas para o agente
+2025-09-21 18:31:05,262 - INFO - Agente ReAct criado com sucesso
+2025-09-21 18:31:05,262 - INFO - PDFChatbot inicializado com sucesso
+✓ Chatbot inicializado com sucesso!
+╭──────────────────────── Bem-vindo ────────────────────────╮
+│ Chatbot de Documentos PDF                                 │
+│ Coleção: fullcycle_langchain                              │
+│ Digite suas perguntas sobre o conteúdo do PDF.            │
+│ Digite 'quit', 'exit', ou 'bye' para encerrar a conversa. │
+╰───────────────────────────────────────────────────────────╯
+
+Sua pergunta: Qual o faturamento da empresa SuperTechIABrazil?
+2025-09-21 18:31:07,491 - INFO - Processando pergunta: 'Qual o faturamento da empresa SuperTechIABrazil?'
+
+🤔 Processando sua pergunta...
+
+
+> Entering new AgentExecutor chain...
+2025-09-21 18:31:08,253 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Action: document_search  
+Action Input: "faturamento da empresa SuperTechIABrazil"  2025-09-21 18:31:08,624 - INFO - Ferramenta executando busca para: 'faturamento da empresa SuperTechIABrazil'
+2025-09-21 18:31:08,624 - INFO - Executando busca por similaridade para: 'faturamento da empresa SuperTechIABrazil' (k=10)
+2025-09-21 18:31:09,192 - INFO - HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-09-21 18:31:09,222 - INFO - Encontrados 10 documentos similares
+2025-09-21 18:31:09,223 - INFO - Sumarizando 10 documentos
+2025-09-21 18:31:11,424 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-21 18:31:11,436 - INFO - Sumarização de contexto concluída
+2025-09-21 18:31:11,437 - INFO - Busca da ferramenta concluída com sucesso
+2025-09-21 18:31:11,501 - INFO - Retrying request to /chat/completions in 0.419732 seconds
+2025-09-21 18:31:12,876 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+The company SuperTechIABrazil has a reported faturamento (revenue) of R$ 10.000.000,00 for the year 2025. This information is found in Document 3 and Document 4. No additional details about the company's financial performance or context are provided in the other document chunks.Agora eu sei a resposta final  
+Final Answer: O faturamento da empresa SuperTechIABrazil é de R$ 10.000.000,00 para o ano de 2025.
+
+> Finished chain.
+2025-09-21 18:31:13,653 - INFO - Pergunta processada com sucesso
+
+🤖 Resposta:
+╭─────────────────────────────────────────────────────────────────────────────── Resposta ───────────────────────────────────────────────────────────────────────────────╮
+│ O faturamento da empresa SuperTechIABrazil é de R$ 10.000.000,00 para o ano de 2025.                                                                                   │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+Sua pergunta: Qual o cor do ceu ?                                 
+2025-09-21 18:38:53,855 - INFO - Processando pergunta: 'Qual o cor do ceu ?'
+
+🤔 Processando sua pergunta...
+
+
+> Entering new AgentExecutor chain...
+2025-09-21 18:38:54,882 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-09-21 18:38:56,420 - INFO - HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+Não tenho informações necessárias para responder sua pergunta.Invalid Format: Missing 'Action:' after 'Thought:'Question: Qual a cor do céu?
+Thought: Não tenho informações necessárias para responder sua pergunta.
+Final Answer: Não tenho informações necessárias para responder sua pergunta.
+
+> Finished chain.
+2025-09-21 18:38:57,001 - INFO - Pergunta processada com sucesso
+
+🤖 Resposta:
+╭─────────────────────────────────────────────────────────────────────────────── Resposta ───────────────────────────────────────────────────────────────────────────────╮
+│ Não tenho informações necessárias para responder sua pergunta.                                                                                                         │
+╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+"""
