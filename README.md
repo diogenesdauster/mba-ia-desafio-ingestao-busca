@@ -11,7 +11,7 @@ Nesse projeto irei usar os seguintes tópicos abordados na modulo de nivelamento
 - [x] Iniciando com sumarização
 - [x] TextSpliter e Sumarização
 - [x] Criando pipeline customizado de sumarização
-- [ ] Agentes e ReAct
+- [x] Agentes e ReAct
 - [x] Criando Tools / Desenvolvendo Agentes
 - [x] Introduçao a Data Loading e RAG 
 - [x] Carregamento de PDF 
@@ -153,17 +153,21 @@ Retrieved Docs → Summarization → Context → LLM → Answer
 # OpenAI
 OPENAI_API_KEY=sua_chave_aqui
 EMBEDDING_MODEL=text-embedding-3-small  # ou text-embedding-ada-002
-CHAT_MODEL=gpt-5o-mini                  # ou gpt-3.5-turbo
+CHAT_MODEL=gpt-5o-mini                 
 
 # Database
-DATABASE_URL=postgresql://postgres:postgres@localhost:5432/rag
+DATABASE_URL=postgresql+psycopg://postgres:postgres@host.docker.internal:5432/rag
 
 #Collection
 PG_VECTOR_COLLECTION_NAME=fullcycle_langchain
 
-# Processamento
+#Processamento PDF 
+PDF_PATH=./document.pdf
 CHUNK_SIZE=1000
 CHUNK_OVERLAP=150
+
+#Logs
+LOG_LEVEL=INFO
 
 ```
 
@@ -186,6 +190,11 @@ react_prompt = PromptTemplate(
     input_variables=["tools", "tool_names", "input", "agent_scratchpad", "chat_history"],
     template="""Seu prompt customizado aqui..."""
 )
+
+# Levei horas para descobrir que não da para traduzir o prompt ReAct do Langchain
+# temos que utilizar as keywords em inglês além do pulo do gato que foi apenas a linhas abaixo :
+# IMPORTANTE: No campo Action, use apenas o nome da ferramenta SEM colchetes. Exemplo: "document_search" e NÃO "[document_search]"
+
 ```
 
 ## 🐛 Solução de Problemas
