@@ -45,7 +45,7 @@ class DocumentSearchTool:
             
             # Inicializa LLM para sumarização
             self.llm = ChatOpenAI(
-                model=os.getenv('CHAT_MODEL', 'gpt-4o-mini'),
+                model=os.getenv('CHAT_MODEL', 'gpt-5o-mini'),
                 api_key=os.getenv('OPENAI_API_KEY'),
                 temperature=0.1
             )
