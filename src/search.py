@@ -191,7 +191,7 @@ def create_search_tool(collection_name: str = "pdf_documents") -> tool:
             Use this tool to search through the ingested PDF documents for information relevant to answering questions.
             The tool will perform similarity search and return a summarized context that's most relevant to your query.
            Input should be a clear question or search query about the document content.
-            """,return_direct=True)
+            """,return_direct=False)
         def document_search(query: str) -> str:
             """Busca documentos e retorna contexto sumarizado"""
             try:
