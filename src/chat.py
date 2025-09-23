@@ -122,6 +122,24 @@ class PDFChatbot:
     def _create_react_agent(self):
         """Cria agente ReAct com prompt personalizado"""
         try:
+            """
+                Pulo do Gato : 
+
+                    Estrutura : 
+
+                        Seu prompt ....
+
+                        Prompt ReAct ... : Sem traduzir as Keywords , pos langchain precisa delas 
+
+                        Caso utilize tools adicione a linha : 
+
+                        # IMPORTANTE: No campo Action, use apenas o nome da ferramenta SEM colchetes. Exemplo: "document_search" e NÃO "[document_search]"
+
+                        Begin!
+
+                        Question: {input}
+                        Thought:{agent_scratchpad}
+            """
             # Template de prompt ReAct integrando regras do PROMPT_TEMPLATE em português
             react_prompt = PromptTemplate(
                 input_variables=["tools", "tool_names", "input", "agent_scratchpad"],

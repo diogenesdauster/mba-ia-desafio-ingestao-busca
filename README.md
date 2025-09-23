@@ -105,10 +105,21 @@ python chat.py
 docker compose up -d
 
 # 2. Faça a ingestão
-python ingest.py meu_documento.pdf
+
+# Opção 1 - Inicia a ingestão passando o pdf via parâmetro
+python ingest.py meu_documento.pdf 
+
+# Opção 2 - Inicia a ingestão pegando o pdf do arquivo .env
+python ingest.py 
+
 
 # 3. Inicie o chat
-python chat.py meu_documento
+
+# Opção 1 - Inicia o chat passando a collection
+python chat.py pdf_documents
+
+# Opção 2 - Inicia o chat pegando a collection do arquivo .env
+python chat.py pdf_documents
 
 # 4. Faça perguntas sobre o PDF
 Your question: Qual é o tema principal do documento?
@@ -174,27 +185,41 @@ LOG_LEVEL=INFO
 ### Personalizações
 
 #### Modificar o Tamanho dos Chunks
-```python
-# No ingest.py, ajuste:
-self.text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1500,  # Chunks maiores
-    chunk_overlap=300,
-    separators=["\n\n", "\n", " ", ""]
-)
+
+```bash
+# No .env ajuste:
+CHUNK_SIZE=1000 # chunck maiores
+CHUNK_OVERLAP=150
 ```
 
 #### Customizar o Prompt ReAct
 ```python
 # No chat.py, modifique o template do react_prompt
 react_prompt = PromptTemplate(
-    input_variables=["tools", "tool_names", "input", "agent_scratchpad", "chat_history"],
+    input_variables=["tools", "tool_names", "input", "agent_scratchpad"],
     template="""Seu prompt customizado aqui..."""
 )
 
-# Levei horas para descobrir que não da para traduzir o prompt ReAct do Langchain
-# temos que utilizar as keywords em inglês além do pulo do gato que foi apenas a linhas abaixo :
-# IMPORTANTE: No campo Action, use apenas o nome da ferramenta SEM colchetes. Exemplo: "document_search" e NÃO "[document_search]"
+# Levei horas para descobrir esse pulo do gato , pois estava usando um prompt todo em português
 
+"""
+   Pulo do Gato : 
+
+      Estrutura : 
+
+            Seu prompt ....
+
+            Prompt ReAct ... : Sem traduzir as Keywords , pois o langchain precisa delas 
+
+            Caso utilize tools adicione a linha : 
+
+            # IMPORTANTE: No campo Action, use apenas o nome da ferramenta SEM colchetes. Exemplo: "document_search" e NÃO "[document_search"
+
+            Begin!
+
+            Question: {input}
+            Thought:{agent_scratchpad}
+"""
 ```
 
 ## 🐛 Solução de Problemas
