@@ -45,7 +45,7 @@ class DocumentSearchTool:
             
             # Inicializa LLM para sumarização
             self.llm = ChatOpenAI(
-                model=os.getenv('CHAT_MODEL', 'gpt-5o-mini'),
+                model=os.getenv('CHAT_MODEL', 'gpt-5-nano'),
                 api_key=os.getenv('OPENAI_API_KEY'),
                 temperature=0.1
             )
@@ -106,7 +106,7 @@ class DocumentSearchTool:
                 query=query,
                 k=k
             )
-            
+                        
             logger.info(f"Encontrados {len(results)} documentos similares")
             return results
             
@@ -191,12 +191,48 @@ def create_search_tool(collection_name: str = "pdf_documents") -> tool:
             Use this tool to search through the ingested PDF documents for information relevant to answering questions.
             The tool will perform similarity search and return a summarized context that's most relevant to your query.
            Input should be a clear question or search query about the document content.
-            """,return_direct=False)
+            """,return_direct=True)
         def document_search(query: str) -> str:
             """Busca documentos e retorna contexto sumarizado"""
             try:
                 logger.info(f"Ferramenta executando busca para: '{query}'")
-                result = search_tool.search_and_summarize(query, k=10)
+                summary = search_tool.search_and_summarize(query, k=10)
+
+                quest_prompt = PromptTemplate(
+                    input_variables=["summary", "query"],
+                    template="""                        
+                        CONTEXTO:
+                        
+                        {summary}
+
+                        REGRAS:
+                        - Responda somente com base no CONTEXTO.
+                        - Se a informação não estiver explicitamente no CONTEXTO, responda:
+                        "Não tenho informações necessárias para responder sua pergunta."
+                        - Nunca invente ou use conhecimento externo.
+                        - Nunca produza opiniões ou interpretações além do que está escrito.
+
+                        EXEMPLOS DE PERGUNTAS FORA DO CONTEXTO:
+                        Pergunta: "Qual é a capital da França?"
+                        Resposta: "Não tenho informações necessárias para responder sua pergunta."
+
+                        Pergunta: "Quantos clientes temos em 2024?"
+                        Resposta: "Não tenho informações necessárias para responder sua pergunta."
+
+                        Pergunta: "Você acha isso bom ou ruim?"
+                        Resposta: "Não tenho informações necessárias para responder sua pergunta."
+
+                        PERGUNTA DO USUÁRIO:
+                        {query}
+
+                        RESPONDA A "PERGUNTA DO USUÁRIO"                    
+                    """
+                )
+
+                quest_chain = quest_prompt | search_tool.llm | StrOutputParser()
+
+                result = quest_chain.invoke({"summary":summary,"query": query})
+
                 logger.info("Busca da ferramenta concluída com sucesso")
                 return result
             except Exception as e:
