@@ -164,7 +164,7 @@ Retrieved Docs → Summarization → Context → LLM → Answer
 # OpenAI
 OPENAI_API_KEY=sua_chave_aqui
 EMBEDDING_MODEL=text-embedding-3-small  # ou text-embedding-ada-002
-CHAT_MODEL=gpt-5o-mini                 
+CHAT_MODEL=gpt-5-nano                 
 
 # Database
 DATABASE_URL=postgresql+psycopg://postgres:postgres@host.docker.internal:5432/rag
@@ -178,7 +178,10 @@ CHUNK_SIZE=1000
 CHUNK_OVERLAP=150
 
 #Logs
+# Apresenta os logs de cada implementacao
 LOG_LEVEL=INFO
+# Nao apresenta os logs de cada implementacao
+LOG_LEVEL=ERROR 
 
 ```
 
@@ -199,27 +202,6 @@ react_prompt = PromptTemplate(
     input_variables=["tools", "tool_names", "input", "agent_scratchpad"],
     template="""Seu prompt customizado aqui..."""
 )
-
-# Levei horas para descobrir esse pulo do gato , pois estava usando um prompt todo em português
-
-"""
-   Pulo do Gato : 
-
-      Estrutura : 
-
-            Seu prompt ....
-
-            Prompt ReAct ... : Sem traduzir as Keywords , pois o langchain precisa delas 
-
-            Caso utilize tools adicione a linha : 
-
-            # IMPORTANTE: No campo Action, use apenas o nome da ferramenta SEM colchetes. Exemplo: "document_search" e NÃO "[document_search"
-
-            Begin!
-
-            Question: {input}
-            Thought:{agent_scratchpad}
-"""
 ```
 
 ## 🐛 Solução de Problemas
