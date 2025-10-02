@@ -91,13 +91,6 @@ class PDFChatbot:
         except Exception as e:
             logger.error(f"Falha ao criar ferramentas: {str(e)}")
             raise
-    
-    def _handle_parsing_errors(self, error_message: str) -> str:
-        """Manipula erros de parsing do agente ReAct"""
-        
-        print(error_message)
-
-        return error_message
 
     def _create_react_agent(self):
         """Cria agente ReAct com prompt personalizado"""
